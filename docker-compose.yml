@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  merchants-web:
+    image: ${DOCKER_REGISTRY-}merchantsweb
+    build:
+      context: .
+      dockerfile: Merchants.Web/Dockerfile
+    ports:
+      - "8000:80"
+      - "8001:433"
+    environment:
+      ConnectionStrings__MerchantsAppConnection: "Server=merchants-db;Database=Merchants;User=sa;Password=Merchant_App_123;"      
+    depends_on:
+      - merchants-db
+  merchants-db:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      SA_PASSWORD: "Merchant_App_123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "7000:1433"
