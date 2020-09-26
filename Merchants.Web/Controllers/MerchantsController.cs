@@ -5,7 +5,6 @@ using Merchants.Web.Filters;
 using Merchants.Web.Models;
 using Merchants.Web.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -135,7 +134,7 @@ namespace Merchants.Web.Controllers
         }
 
         [HttpGet]
-        [Route("merchantsstatues/all")]
+        [Route("statues/all")]
         [Produces("application/json")]
         public IActionResult GetMerchantsStatues()
         {

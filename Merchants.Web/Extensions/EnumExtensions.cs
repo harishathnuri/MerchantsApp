@@ -15,7 +15,7 @@ namespace Merchants.Web.Extensions
                 values.Add(new EnumValue()
                 {
                     Name = Enum.GetName(typeof(T), itemType),
-                    Value = (int)itemType
+                    Id = (int)itemType
                 });
             }
             return values;

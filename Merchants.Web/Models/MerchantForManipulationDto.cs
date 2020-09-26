@@ -10,6 +10,8 @@ namespace Merchants.Web.Models
         [MaxLength(64, ErrorMessage = "The name shouldn't have more than 64 characters.")]
         public virtual string Name { get; set; }
 
+        public MerchantStatus Status { get; set; }
+
         [Required(ErrorMessage = "Please enter valid country.")]
         public virtual Guid CountryId { get; set; }
 
