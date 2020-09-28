@@ -1,8 +1,10 @@
 ﻿using Merchants.Web.DbContexts;
 using Merchants.Web.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Merchants.Web.Services
 {
@@ -32,14 +34,14 @@ namespace Merchants.Web.Services
             _context.Merchants.Remove(merchant);
         }
 
-        public Merchant GetMerchant(Guid merchantId)
+        public Task<Merchant> GetMerchant(Guid merchantId)
         {
-            return _context.Merchants.FirstOrDefault(a => a.Id == merchantId);
+            return _context.Merchants.FirstOrDefaultAsync(a => a.Id == merchantId);
         }
 
-        public IEnumerable<Merchant> GetMerchants()
+        public async Task<IEnumerable<Merchant>> GetMerchants()
         {
-            return _context.Merchants.OrderBy(m => m.Name).ToList();
+            return await _context.Merchants.OrderBy(m => m.Name).ToListAsync();
         }
 
         public void UpdateMerchant(Merchant merchant)
@@ -47,30 +49,27 @@ namespace Merchants.Web.Services
             // no code in this implementation
         }
 
-        public IEnumerable<Country> GetCountries()
+        public async Task<IEnumerable<Country>> GetCountries()
         {
-            return _context.Countries.ToList();
+            return await _context.Countries.ToListAsync();
         }
 
-        public Country GetCountry(Guid countryId)
+        public async Task<Country> GetCountry(Guid countryId)
         {
-            return _context.Countries.FirstOrDefault(c => c.Id == countryId);
+            return await _context.Countries.FirstOrDefaultAsync(c => c.Id == countryId);
         }
 
-        public IEnumerable<Currency> GetCurrencies()
+        public async Task<IEnumerable<Currency>> GetCurrencies()
         {
-            return _context.Currencies.ToList();
+            return await _context.Currencies.ToListAsync();
         }
 
-        public Currency GetCurrency(Guid currencyId)
+        public async Task<Currency> GetCurrency(Guid currencyId)
         {
-            return _context.Currencies.FirstOrDefault(c => c.Id == currencyId);
+            return await _context.Currencies.FirstOrDefaultAsync(c => c.Id == currencyId);
         }
 
-        public bool Save()
-        {
-            return (_context.SaveChanges() >= 0);
-        }
+        public async Task<bool> Save() => ((await _context.SaveChangesAsync()) >= 0);
 
         public void Dispose()
         {

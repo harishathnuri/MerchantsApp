@@ -47,7 +47,7 @@ export default class ModalForm extends Component {
       title = "Add New Item";
     }
     return (
-      <div>
+      <>
         {button}
         <Modal
           isOpen={this.state.modal}
@@ -69,7 +69,7 @@ export default class ModalForm extends Component {
             />
           </ModalBody>
         </Modal>
-      </div>
+      </>
     );
   }
 }

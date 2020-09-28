@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Merchants.Web.Controllers
 {
@@ -34,11 +35,11 @@ namespace Merchants.Web.Controllers
         [HttpGet()]
         [HttpHead]
         [Produces("application/json")]
-        public ActionResult<IEnumerable<MerchantDto>> GetMerchants()
+        public async Task<ActionResult<IEnumerable<MerchantDto>>> GetMerchants()
         {
             _logger.LogDebug("Start - GetMerchants");
 
-            var merchantsFromRepo = _merchantsRepository.GetMerchants();
+            var merchantsFromRepo = await _merchantsRepository.GetMerchants();
 
             _logger.LogDebug("End - GetMerchants");
 
@@ -47,11 +48,11 @@ namespace Merchants.Web.Controllers
 
         [HttpGet("{merchantId}", Name = "GetMerchant")]
         [Produces("application/json")]
-        public IActionResult GetMerchant(Guid merchantId)
+        public async Task<IActionResult> GetMerchant(Guid merchantId)
         {
             _logger.LogDebug($"Start - GetMerchant - {merchantId}");
 
-            var merchantFromRepo = _merchantsRepository.GetMerchant(merchantId);
+            var merchantFromRepo = await _merchantsRepository.GetMerchant(merchantId);
 
             if (merchantFromRepo == null)
             {
@@ -90,19 +91,19 @@ namespace Merchants.Web.Controllers
         [TypeFilter(typeof(ValidateMerchantId))]
         [Consumes("application/json")]
         [Produces("application/json")]
-        public IActionResult UpdateMerchant(Guid merchantId,
+        public async Task<IActionResult> UpdateMerchant(Guid merchantId,
             MerchantForUpdateDto merchant)
         {
             _logger.LogDebug(
                 $"Start - UpdateMerchant - {merchantId}, {JsonConvert.SerializeObject(merchant, Formatting.Indented)}");
 
-            var merchantFromRepo = _merchantsRepository.GetMerchant(merchantId);
+            var merchantFromRepo = await _merchantsRepository.GetMerchant(merchantId);
 
             _mapper.Map(merchant, merchantFromRepo);
 
             _merchantsRepository.UpdateMerchant(merchantFromRepo);
 
-            _merchantsRepository.Save();
+            await _merchantsRepository.Save();
 
             _logger.LogDebug($"End - UpdateMerchant - {merchantId}");
 
@@ -111,15 +112,15 @@ namespace Merchants.Web.Controllers
 
         [HttpDelete("{merchantId}")]
         [TypeFilter(typeof(ValidateMerchantId))]
-        public ActionResult DeleteMerchant(Guid merchantId)
+        public async Task<ActionResult> DeleteMerchant(Guid merchantId)
         {
             _logger.LogDebug($"Start - DeleteMerchant - {merchantId}");
 
-            var merchantFromRepo = _merchantsRepository.GetMerchant(merchantId);
+            var merchantFromRepo = await _merchantsRepository.GetMerchant(merchantId);
 
             _merchantsRepository.DeleteMerchant(merchantFromRepo);
 
-            _merchantsRepository.Save();
+            await _merchantsRepository.Save();
 
             _logger.LogDebug($"End - DeleteMerchant - {merchantId}");
 
@@ -144,17 +145,17 @@ namespace Merchants.Web.Controllers
         [HttpGet]
         [Route("countries/all")]
         [Produces("application/json")]
-        public IActionResult GetCountries()
+        public async Task<IActionResult> GetCountries()
         {
-            return Ok(_merchantsRepository.GetCountries());
+            return Ok(await _merchantsRepository.GetCountries());
         }
 
         [HttpGet]
         [Route("currencies/all")]
         [Produces("application/json")]
-        public IActionResult GetCurrencies()
+        public async Task<IActionResult> GetCurrencies()
         {
-            return Ok(_merchantsRepository.GetCurrencies());
+            return Ok(await _merchantsRepository.GetCurrencies());
         }
     }
 }

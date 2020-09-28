@@ -23,7 +23,7 @@ class DataTable extends Component {
           <td>{item.discountPercentage}</td>
           <td>{statusName}</td>
           <td>
-            <div style={{ width: "110px" }}>
+            <div style={{ width: "120px" }}>
               <ModalForm
                 buttonLabel="Edit"
                 countries={this.props.countries}
@@ -54,6 +54,7 @@ class DataTable extends Component {
             <th>Currency</th>
             <th>Discount Percentage</th>
             <th>Status</th>
+            <th>{""}</th>
           </tr>
         </thead>
         <tbody>{items}</tbody>

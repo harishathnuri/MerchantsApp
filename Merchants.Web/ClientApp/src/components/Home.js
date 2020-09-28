@@ -1,25 +1,56 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export class Home extends Component {
   static displayName = Home.name;
 
-  render () {
+  render() {
     return (
       <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
+        <h1>Merchants Application and API</h1>
+        <p>
+          We want you to create an API(.net core) and APP (React) which can be
+          used to create, view, update and delete merchants. At this point do
+          not worry about authentication.
+        </p>
+        <p>
+          <strong>Here are a few characteristics of a Merchant</strong>
+        </p>
         <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
+          <li>Unique ID</li>
+          <li>Status (Active/Inactive)</li>
+          <li>Currency</li>
+          <li>Website URL</li>
+          <li>Country</li>
+          <li>Discount Percentage</li>
         </ul>
-        <p>To help you get started, we have also set up:</p>
+        <p>
+          <strong>Things to think about:</strong>
+        </p>
         <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
+          <li>
+            Think about points of failure and how your endpoint will perform
+            under load.
+          </li>
+          <li>
+            Language/frameworks: .Net core is preferred, use docker-compose to
+            set up any datastore of your choice
+          </li>
+          <li>
+            Testing: use whatever tools you prefer to test your code
+            appropriately
+          </li>
+          <li>
+            Try to implement appropriate separation of concerns & modular code
+          </li>
+          <li>
+            Think hard about the naming of functions and variables. Your code
+            must be readable
+          </li>
+          <li>
+            Code style & file structure is up to you, but make sure it is
+            consistent and easy to understand
+          </li>
         </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
       </div>
     );
   }
