@@ -1,22 +1,22 @@
 ﻿using Merchants.Web.Entities;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Merchants.Web.Services
 {
     public interface IMerchantsRepository
     {
-        Task<IEnumerable<Merchant>> GetMerchants();
-        Task<Merchant> GetMerchant(Guid merchantId);
+        IEnumerable<Merchant> GetMerchants();
+        Merchant GetMerchant(Guid merchantId);
+        Merchant GetMerchant(string name);
         void AddMerchant(Merchant merchant);
         void UpdateMerchant(Merchant merchant);
         void DeleteMerchant(Merchant merchant);
-        Task<IEnumerable<Country>> GetCountries();
-        Task<Country> GetCountry(Guid countryId);
-        Task<IEnumerable<Currency>> GetCurrencies();
-        Task<Currency> GetCurrency(Guid currencyId);
+        IEnumerable<Country> GetCountries();
+        Country GetCountry(Guid countryId);
+        IEnumerable<Currency> GetCurrencies();
+        Currency GetCurrency(Guid currencyId);
 
-        Task<bool> Save();
+        bool Save();
     }
 }

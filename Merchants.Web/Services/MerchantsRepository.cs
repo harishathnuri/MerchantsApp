@@ -34,42 +34,47 @@ namespace Merchants.Web.Services
             _context.Merchants.Remove(merchant);
         }
 
-        public Task<Merchant> GetMerchant(Guid merchantId)
-        {
-            return _context.Merchants.FirstOrDefaultAsync(a => a.Id == merchantId);
-        }
-
-        public async Task<IEnumerable<Merchant>> GetMerchants()
-        {
-            return await _context.Merchants.OrderBy(m => m.Name).ToListAsync();
-        }
-
         public void UpdateMerchant(Merchant merchant)
         {
             // no code in this implementation
         }
 
-        public async Task<IEnumerable<Country>> GetCountries()
+        public Merchant GetMerchant(Guid merchantId)
         {
-            return await _context.Countries.ToListAsync();
+            return _context.Merchants.FirstOrDefault(a => a.Id == merchantId);
         }
 
-        public async Task<Country> GetCountry(Guid countryId)
+        public Merchant GetMerchant(string name)
         {
-            return await _context.Countries.FirstOrDefaultAsync(c => c.Id == countryId);
+            return _context.Merchants.FirstOrDefault(a => a.Name == name);
         }
 
-        public async Task<IEnumerable<Currency>> GetCurrencies()
+        public IEnumerable<Merchant> GetMerchants()
         {
-            return await _context.Currencies.ToListAsync();
+            return _context.Merchants.OrderBy(m => m.Name).ToList();
         }
 
-        public async Task<Currency> GetCurrency(Guid currencyId)
+        public IEnumerable<Country> GetCountries()
         {
-            return await _context.Currencies.FirstOrDefaultAsync(c => c.Id == currencyId);
+            return _context.Countries.ToList();
         }
 
-        public async Task<bool> Save() => ((await _context.SaveChangesAsync()) >= 0);
+        public Country GetCountry(Guid countryId)
+        {
+            return _context.Countries.FirstOrDefault(c => c.Id == countryId);
+        }
+
+        public IEnumerable<Currency> GetCurrencies()
+        {
+            return _context.Currencies.ToList();
+        }
+
+        public Currency GetCurrency(Guid currencyId)
+        {
+            return _context.Currencies.FirstOrDefault(c => c.Id == currencyId);
+        }
+
+        public bool Save() => _context.SaveChanges() >= 0;
 
         public void Dispose()
         {

@@ -22,6 +22,7 @@ namespace Merchants.Web.Models
         public virtual Guid CurrencyId { get; set; }
 
         [Required(ErrorMessage = "Please fill discount percentage.")]
+        [Range(0, 99.99, ErrorMessage = "Discount percentage should fall between 0 and 99.99.")]
         public virtual double DiscountPercentage { get; set; }
     }
 }
