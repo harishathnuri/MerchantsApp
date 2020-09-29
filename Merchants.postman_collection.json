@@ -1,0 +1,694 @@
+{
+	"info": {
+		"_postman_id": "afc0d5f1-00ff-451b-becb-4b5cff7ce16e",
+		"name": "Merchants",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetMerchants",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "552e21ae-efb1-4b2b-8a9e-1c359edda3c1",
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.test(\"status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"All merchants should have name\", () =>{\r",
+							"    pm.expect(responseJson.every(merchant => {\r",
+							"        return merchant.name !== undefined;\r",
+							"    })).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/merchants",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCountries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e08024c6-518a-448e-80a5-3dc3c510aa9e",
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.test(\"status code is 200\", () =>  {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns 5 countries\", () => {\r",
+							"    pm.expect(responseJson.length).to.eq(5);\r",
+							"});\r",
+							"\r",
+							"const map = {};\r",
+							"responseJson.reduce((acc, item) => {\r",
+							"    acc[item.name] = item;\r",
+							"     return acc;\r",
+							"}, map);\r",
+							"pm.environment.set(\"countries\", JSON.stringify(map));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/merchants/countries/all",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants",
+						"countries",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCurrencies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "043920cb-00f6-4e19-9a39-b33257d30f6b",
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns 5 currencies\", () => {\r",
+							"    pm.expect(responseJson.length).to.eq(5);\r",
+							"});\r",
+							"\r",
+							"const map = {};\r",
+							"responseJson.reduce((acc, item) => {\r",
+							"    acc[item.name] = item;\r",
+							"     return acc;\r",
+							"}, map);\r",
+							"pm.environment.set(\"currencies\", JSON.stringify(map));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/merchants/currencies/all",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants",
+						"currencies",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetStatues",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c5c14e31-344d-4a9c-b384-8e4e23d9b735",
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.test(\"status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns 2 statues\", () => {\r",
+							"    pm.expect(responseJson.length).to.eq(2);\r",
+							"});\r",
+							"\r",
+							"const map = {};\r",
+							"responseJson.reduce((acc, item) => {\r",
+							"    acc[item.name] = item;\r",
+							"     return acc;\r",
+							"}, map);\r",
+							"\r",
+							"pm.environment.set(\"statues\", JSON.stringify(map));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/merchants/statues/all",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants",
+						"statues",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostMerchant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fec3545a-7706-453f-89b0-b559b2b9692b",
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.test(\"status code is 201\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Merchant name is Coles\", () => {\r",
+							"    pm.expect(responseJson.name).to.eql(\"Coles\");\r",
+							"    pm.expect(responseJson.countryId).to.eql(pm.environment.get(\"country\"));\r",
+							"    pm.expect(responseJson.currencyId).to.eql(pm.environment.get(\"currency\"));\r",
+							"}); \r",
+							"\r",
+							"pm.environment.set(\"merchnatId\", responseJson.id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "50c2656a-b987-4fce-af94-4fec06f4dfa5",
+						"exec": [
+							"\r",
+							"const statues = pm.environment.get(\"statues\");\r",
+							"pm.environment.set(\"status\", JSON.parse(statues)['Active'].id);\r",
+							"const countries = pm.environment.get(\"countries\");\r",
+							"pm.environment.set(\"country\", JSON.parse(countries)['Australia'].id);\r",
+							"const currencies = pm.environment.get(\"currencies\");\r",
+							"pm.environment.set(\"currency\", JSON.parse(currencies)['AUD'].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Coles\",\r\n    \"status\": {{status}},\r\n    \"countryId\": \"{{country}}\",\r\n    \"websiteUrl\": \"https://coles.com\",\r\n    \"currencyId\": \"{{currency}}\",\r\n    \"discountPercentage\": 10.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/merchants",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostMerchant-BigW",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9663b4a-e50d-419e-9ddb-d6030edf066a",
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.test(\"status code is 201\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Merchant name is BigW\", () => {\r",
+							"    pm.expect(responseJson.name).to.eql(\"BigW\");\r",
+							"    pm.expect(responseJson.countryId).to.eql(pm.environment.get(\"country\"));\r",
+							"    pm.expect(responseJson.currencyId).to.eql(pm.environment.get(\"currency\"));\r",
+							"}); \r",
+							"\r",
+							"pm.environment.set(\"merchantId\", responseJson.id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "51155ecf-dfbe-42ac-9c75-065aafbb53a1",
+						"exec": [
+							"\r",
+							"const statues = pm.environment.get(\"statues\");\r",
+							"pm.environment.set(\"status\", JSON.parse(statues)['Active'].id);\r",
+							"const countries = pm.environment.get(\"countries\");\r",
+							"pm.environment.set(\"country\", JSON.parse(countries)['Australia'].id);\r",
+							"const currencies = pm.environment.get(\"currencies\");\r",
+							"pm.environment.set(\"currency\", JSON.parse(currencies)['AUD'].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"BigW\",\r\n    \"status\": {{status}},\r\n    \"countryId\": \"{{country}}\",\r\n    \"websiteUrl\": \"https://bigw.com\",\r\n    \"currencyId\": \"{{currency}}\",\r\n    \"discountPercentage\": 10.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/merchants",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostMerchantWithValidParameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c3423a77-36c1-4092-983c-65bd71994dba",
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.test(\"status code is 201\", function() {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Duplicate merchant with valid parameters\", () => {\r",
+							"    pm.expect(responseJson.errors.name[0]).to.eql(\"Duplicate merchant Coles\");\r",
+							"}); "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ac26c788-f74f-4e86-92b7-0140614556a1",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Coles\",\r\n    \"status\": {{status}},\r\n    \"countryId\": \"{{country}}\",\r\n    \"websiteUrl\": \"https://coles.com\",\r\n    \"currencyId\": \"{{currency}}\",\r\n    \"discountPercentage\": 10.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/merchants",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostMerchantWithoutRequiredParameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a52376c7-9d25-4e95-96ea-2b5db04c7332",
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.test(\"status code is 422\", function() {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Merchant without required parameters\", () => {\r",
+							"    pm.expect(responseJson.errors.name[0]).to.eql(\"Please enter valid name.\");\r",
+							"}); "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "66cd1ea1-0dc6-45a8-8e72-e952e13fdc0a",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": {{status}},\r\n    \"countryId\": \"{{country}}\",\r\n    \"websiteUrl\": \"https://bigw.com\",\r\n    \"currencyId\": \"{{currency}}\",\r\n    \"discountPercentage\": 10.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/merchants",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostMerchantWithInvalidParameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "77ddf60d-e1af-43d3-8a59-beb29a3fc4f6",
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.test(\"status code is 422\", function() {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Merchant with invalid parameters\", () => {\r",
+							"    pm.expect(responseJson.errors.name[0]).to.eql(\"The name shouldn't have more than 64 characters.\");\r",
+							"    pm.expect(responseJson.errors.websiteUrl[0]).to.eql(\"The website url shouldn't have more than 256 characters.\");\r",
+							"    pm.expect(responseJson.errors.discountPercentage[0]).to.eql(\"Discount percentage should fall between 0 and 99.99.\");\r",
+							"}); "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fafe68a3-87a7-4f67-bc18-3b31b275425c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"A man went to his neighbor and knocked on his door and the following conversation ensued\",\r\n    \"status\": {{status}},\r\n    \"countryId\": \"{{country}}\",\r\n    \"websiteUrl\": \"A man went to his neighbor and knocked on his door and the following conversation ensued:- Hello, I come to you because your dog bit my mother in law 2 times.© www.lettercount.com come back tom o rrow for another joke :-)- Oh no! You are not serious! I will arrange for it to not happen again.\",\r\n    \"currencyId\": \"{{currency}}\",\r\n    \"discountPercentage\": 100.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/merchants",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutMerchant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f479fed-ad1c-4069-b185-1006d7a62b27",
+						"exec": [
+							"pm.test(\"status code is 204\", function() {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7a336182-df1b-42f3-9a7f-ae57a6aa462e",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Coles\",\r\n    \"status\": {{status}},\r\n    \"countryId\": \"{{country}}\",\r\n    \"websiteUrl\": \"https://coles.com\",\r\n    \"currencyId\": \"{{currency}}\",\r\n    \"discountPercentage\": 20.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/merchants/{{merchantId}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants",
+						"{{merchantId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutMerchantWithValidParameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "56ab0fa5-fbfe-4771-ae9c-c4bdc05476b3",
+						"exec": [
+							"pm.test(\"status code is 422\", function() {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "23afc8e4-a1ef-4446-846c-e6c88697ee89",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Coles\",\r\n    \"status\": {{status}},\r\n    \"countryId\": \"{{country}}\",\r\n    \"websiteUrl\": \"https://coles.com\",\r\n    \"currencyId\": \"{{currency}}\",\r\n    \"discountPercentage\": 10.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/merchants/{{merchantId}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants",
+						"{{merchantId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteMerchant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a983e06d-5b81-45a4-a123-9acf90a7bc96",
+						"exec": [
+							"pm.test(\"status code is 204\", function() {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "dbe18e94-42b8-4ed7-86c7-f3e1a17edbbb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/merchants/{{merchantId}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants",
+						"{{merchantId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteMerchantWithInvalidId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "88982446-d814-4e99-a34f-e2d74074a0ed",
+						"exec": [
+							"pm.test(\"status code is 404\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "47af3c04-da4e-45fc-bcc6-f050c9db54d0",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/merchants/{{merchantId}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"merchants",
+						"{{merchantId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

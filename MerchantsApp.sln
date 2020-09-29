@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Merchants.Web", "Merchants.
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7FC024D3-DF06-454D-9764-B7B8FA9DECEC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Merchants.Tests", "Merchants.Tests", "{E6E78A92-68A5-448A-B0DD-3B4A32AA9BA1}"
+	ProjectSection(SolutionItems) = preProject
+		Merchants.postman_collection.json = Merchants.postman_collection.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
