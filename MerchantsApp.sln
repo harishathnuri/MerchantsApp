@@ -12,6 +12,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Merchants.Tests", "Merchant
 		Merchants.postman_collection.json = Merchants.postman_collection.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Merchants.Migration", "Merchants.Migration\Merchants.Migration.csproj", "{B8EF0C7E-B50C-4C6F-8A69-30193512E30A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{3EF99F39-7C8A-4306-AFD4-74C270D3578C}"
+	ProjectSection(SolutionItems) = preProject
+		StartupScript.ps1 = StartupScript.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +33,10 @@ Global
 		{7FC024D3-DF06-454D-9764-B7B8FA9DECEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FC024D3-DF06-454D-9764-B7B8FA9DECEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FC024D3-DF06-454D-9764-B7B8FA9DECEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8EF0C7E-B50C-4C6F-8A69-30193512E30A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8EF0C7E-B50C-4C6F-8A69-30193512E30A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8EF0C7E-B50C-4C6F-8A69-30193512E30A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8EF0C7E-B50C-4C6F-8A69-30193512E30A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
