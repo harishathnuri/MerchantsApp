@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace Merchants.Web.Filters
 {
@@ -31,6 +32,11 @@ namespace Merchants.Web.Filters
 
             context.ActionArguments.TryGetValue("merchant", out object merchant);
 
+            var id = Guid.Empty;
+            if (context.RouteData.Values.ContainsKey("merchantId")) 
+            {
+                id = Guid.Parse(context.RouteData.Values["merchantId"].ToString());
+            }
             var name = (merchant as MerchantForManipulationDto).Name;
             var countryId = (merchant as MerchantForManipulationDto).CountryId;
             var currencyId = (merchant as MerchantForManipulationDto).CurrencyId;
@@ -40,10 +46,10 @@ namespace Merchants.Web.Filters
             var currency = _merchantsRepository.GetCurrency(currencyId);
 
             if (country == null || currency == null 
-                || (merchantFromRepo != null && merchantFromRepo.Name == name))
+                || (merchantFromRepo != null && merchantFromRepo.Id != id))
             {
                 var modelState = new ModelStateDictionary();
-                if ((merchantFromRepo != null && merchantFromRepo.Name == name))
+                if ((merchantFromRepo != null && merchantFromRepo.Id != id))
                 {
                     modelState.AddModelError("Name", $"Duplicate merchant {name}");
                 }

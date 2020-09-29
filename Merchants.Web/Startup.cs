@@ -61,10 +61,10 @@ namespace Merchants.Web
                         var actionExecutingContext =
                               context as Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext;
 
-                          if (context.ModelState.ErrorCount > 0 &&
-                            (context is ControllerContext ||
-                             actionExecutingContext?.ActionArguments.Count 
-                                == context.ActionDescriptor.Parameters.Count))
+                        if (context.ModelState.ErrorCount > 0 &&
+                          (context is ControllerContext ||
+                           actionExecutingContext?.ActionArguments.Count
+                              == context.ActionDescriptor.Parameters.Count))
                         {
                             problemDetails.Type = "https://merchants.com/modelvalidationproblem";
                             problemDetails.Status = StatusCodes.Status422UnprocessableEntity;
@@ -100,7 +100,14 @@ namespace Merchants.Web
 
             services.AddDbContext<MerchantContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("MerchantsAppConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("MerchantsAppConnection"),
+                    sqlServerOptionsAction: sqlOptions =>
+                    {
+                        sqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 10,
+                            maxRetryDelay: TimeSpan.FromSeconds(30),
+                            errorNumbersToAdd: null);
+                    });
             });
 
             services.AddSwaggerGen(
