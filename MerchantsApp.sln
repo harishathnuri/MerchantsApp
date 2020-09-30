@@ -12,11 +12,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Merchants.Tests", "Merchant
 		Merchants.postman_collection.json = Merchants.postman_collection.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Merchants.Migration", "Merchants.Migration\Merchants.Migration.csproj", "{B8EF0C7E-B50C-4C6F-8A69-30193512E30A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Merchants.Migration", "Merchants.Migration\Merchants.Migration.csproj", "{B8EF0C7E-B50C-4C6F-8A69-30193512E30A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{3EF99F39-7C8A-4306-AFD4-74C270D3578C}"
 	ProjectSection(SolutionItems) = preProject
 		StartupScript.ps1 = StartupScript.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02F9048A-A18F-4697-B671-15D251C396B2}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global

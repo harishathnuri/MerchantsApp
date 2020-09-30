@@ -42,7 +42,11 @@ namespace Merchants.Web.Controllers
 
             _logger.LogDebug("End - GetMerchants");
 
-            return Ok(_mapper.Map<IEnumerable<MerchantDto>>(merchantsFromRepo));
+            var merchants = new MerchantListDto
+            {
+                Items = _mapper.Map<IEnumerable<MerchantDto>>(merchantsFromRepo)
+            };
+            return Ok(merchants);
         }
 
         [HttpGet("{merchantId}", Name = "GetMerchant")]
@@ -104,7 +108,7 @@ namespace Merchants.Web.Controllers
 
             _merchantsRepository.UpdateMerchant(merchantFromRepo);
 
-             _merchantsRepository.Save();
+            _merchantsRepository.Save();
 
             _logger.LogDebug($"End - UpdateMerchant - {merchantId}");
 

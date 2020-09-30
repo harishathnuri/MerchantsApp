@@ -7,10 +7,12 @@ services:
       context: .
       dockerfile: Merchants.Web/Dockerfile
     ports:
-      - "8000:80"
-      - "8001:433"
+      - "7500:80"
+      - "7501:433"
     environment:
-      ConnectionStrings__MerchantsAppConnection: "Server=merchants-db;Database=Merchants;User=sa;Password=Merchant_App_123;"      
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=7501
+      - ConnectionStrings__MerchantsAppConnection=Server=merchants-db;Database=Merchants;User=sa;Password=Merchant_App_123;      
     depends_on:
       - merchants-db
   merchants-db:
