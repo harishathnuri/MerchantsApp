@@ -19,7 +19,8 @@ Artefacts are delivered using docker-compose for application and database
 Application is tested using postman scripts and the same is available in Tests folder
 
 **Running application**
-Navigate to root folder of the application and run "StartupScript.ps1"
+
+Navigate to root folder of the application and run **StartupScript.ps1**
 
 **Endpoint details**
 
