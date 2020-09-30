@@ -10,13 +10,16 @@ The frontend is built using React and use reactstrap for styles.
 
 The backend is built using asp.net core, entityframework core and mssql server on docker
 
-**Continious delivery**
+**Continuous delivery**
 
 Artefacts are delivered using docker-compose for application and database
 
 **Testing**
 
 Application is tested using postman scripts and the same is available in Tests folder
+
+**Running application**
+Navigate to root folder of the application and run "StartupScript.ps1"
 
 **Endpoint details**
 
